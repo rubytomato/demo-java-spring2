@@ -1,0 +1,51 @@
+{
+  "hints": [
+    {
+      "name": "my-app.my-module.foo.name",
+      "values": [
+        {
+          "value": "simple",
+          "description": "simple module description."
+        },
+        {
+          "value": "combine",
+          "description": "combine module description."
+        },
+        {
+          "value": "complex",
+          "description": "complex module description."
+        }
+      ],
+      "providers": [
+        {
+          "name": "any"
+        }
+      ]
+    },
+    {
+      "name": "my-app.my-module.foo.colors",
+      "providers": [
+        {
+          "name": "handle-as",
+          "parameters": {
+            "target": "com.example.demomavenspring2.type.Color"
+          }
+        }
+      ]
+    },
+    {
+      "name": "my-app.my-module.foo.parts.values",
+      "values": [
+        {
+          "value": "TRUE",
+          "description": "option enable description."
+        },
+        {
+          "value": "FALSE",
+          "description": "option disable description."
+        }
+      ]
+    }
+  ],
+  "groups": []
+}
