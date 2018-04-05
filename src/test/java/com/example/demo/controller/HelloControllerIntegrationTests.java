@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.DemoMavenSpring2Application;
+import com.example.demo.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 結合テスト
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {DemoMavenSpring2Application.class},
+@SpringBootTest(classes = {Application.class},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(HelloControllerIntegrationTests.TestConfig.class)
 public class HelloControllerIntegrationTests {
