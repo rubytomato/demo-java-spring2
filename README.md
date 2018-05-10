@@ -3,7 +3,7 @@
 環境
 
 * Java 1.8.0
-* Spring Boot 2.0.1
+* Spring Boot 2.0.2
 * Maven 3.5.2
 
 ## compile
@@ -17,11 +17,11 @@ mvn clean package
 ### executable jar
 
 ```text
-java -jar target\demo-java-spring2.0.0.2-SNAPSHOT.jar
+java -jar target\demo.jar
 ```
 
 ```text
-java -jar -Dspring.profiles.active=dev target\demo-java-spring2-0.0.2-SNAPSHOT.jar
+java -jar -Dspring.profiles.active=dev target\demo.jar
 ```
 
 ### spring boot maven plugin
@@ -80,11 +80,15 @@ curl -v -X DELETE "http://localhost:9000/app/memo/1"
 
 ## database
 
+database
+
 ```sql
 CREATE DATABASE IF NOT EXISTS demo_db
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci;
 ```
+
+user
 
 ```sql
 CREATE USER IF NOT EXISTS 'demo_user'@'localhost'
@@ -93,6 +97,8 @@ CREATE USER IF NOT EXISTS 'demo_user'@'localhost'
 
 GRANT ALL ON demo_db.* TO 'demo_user'@'localhost';
 ```
+
+table
 
 ```sql
 DROP TABLE IF EXISTS memo;
@@ -109,6 +115,8 @@ ENGINE = INNODB,
 CHARACTER SET = utf8mb4,
 COLLATE utf8mb4_general_ci;
 ```
+
+test data
 
 ```sql
 INSERT INTO memo (id, title, description, done, updated) VALUES
