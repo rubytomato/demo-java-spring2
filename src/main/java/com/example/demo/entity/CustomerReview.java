@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.type.StandardType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,42 +10,37 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "item")
+@Table(name = "customer_review")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Item {
+public class CustomerReview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", nullable = false)
-    private String name;
-    @Column(name = "price", nullable = false)
-    private Integer price;
-    @Column(name = "sales_from", nullable = false)
-    private LocalDate salesFrom;
-    @Column(name = "sales_to", nullable = false)
-    private LocalDate salesTo;
-    @Enumerated
-    @Column(name = "standard_type", nullable = false)
-    private StandardType standardType;
+    @Column(name = "review_at", nullable = false)
+    private LocalDateTime reviewAt;
+    @Column(name = "review", nullable = false)
+    private String review;
+    @OneToOne(fetch = FetchType.EAGER) // default
+    private CustomerOrder customerOrder;
     @ManyToOne(fetch = FetchType.EAGER) // default
-    private Category category;
+    @JsonBackReference("customer")
+    private Customer customer;
     @Column(name = "create_at", nullable = false)
     @JsonIgnore
     private LocalDateTime createAt;
@@ -63,5 +58,5 @@ public class Item {
     private void preUpdate() {
         updateAt = LocalDateTime.now();
     }
-}
 
+}

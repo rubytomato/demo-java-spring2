@@ -4,6 +4,7 @@ Development environment
 
 * Java 1.8.0
 * Spring Boot 2.0.2
+* MySQL CE 8.0.11
 * Maven 3.5.2
 
 ## compile
@@ -38,7 +39,7 @@ Specify a profile
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
-### API
+### Memo API
 
 #### get
 
@@ -82,9 +83,26 @@ new_memo.json
 curl -v -X DELETE "http://localhost:9000/app/memo/1"
 ```
 
+### Customer API
+
+#### get
+
+```text
+curl -v "http://localhost:9000/app/customer/1"
+```
+
+#### put
+
+```text
+curl -v -H "Content-Type:application/json" -X PUT "localhost:9000//app/customer/1" -d "{\"nickName\": \"new_nickname\"}"
+```
+
+
 ## database
 
-database
+**database**
+
+resources/scripts/sql/create_database.sql
 
 ```sql
 CREATE DATABASE IF NOT EXISTS demo_db
@@ -92,7 +110,9 @@ CREATE DATABASE IF NOT EXISTS demo_db
   COLLATE = utf8mb4_general_ci;
 ```
 
-user
+**user**
+
+resources/scripts/sql/create_user.sql
 
 ```sql
 CREATE USER IF NOT EXISTS 'demo_user'@'localhost'
@@ -102,7 +122,13 @@ CREATE USER IF NOT EXISTS 'demo_user'@'localhost'
 GRANT ALL ON demo_db.* TO 'demo_user'@'localhost';
 ```
 
-table
+### Using Memo API
+
+**table**
+
+resources/scripts/sql/create_memo_table.sql
+
+switch to demo_db.
 
 ```sql
 DROP TABLE IF EXISTS memo;
@@ -120,7 +146,9 @@ CHARACTER SET = utf8mb4,
 COLLATE utf8mb4_general_ci;
 ```
 
-test data
+**create test data**
+
+resources/scripts/sql/insert_memo_data.sql
 
 ```sql
 INSERT INTO memo (id, title, description, done, updated) VALUES
@@ -135,4 +163,73 @@ INSERT INTO memo (id, title, description, done, updated) VALUES
   (9, 'memo private', 'memo9 description', false, '2018-01-04 20:09:27'),
   (10,'memo hospital', 'memoA description', false, '2018-01-04 21:10:38')
 ;
+```
+
+### using Customer API 
+
+**table**
+
+resources/scripts/sql/v2_schema.sql
+resources/scripts/sql/v2_constraint.sql
+
+```sql
+show tables;
+
++-------------------+
+| Tables_in_demo_db |
++-------------------+
+| category          |
+| customer          |
+| customer_order    |
+| customer_review   |
+| item              |
+| item_stock        |
+| location          |
+| memo              |
++-------------------+
+8 rows in set (0.03 sec)
+```
+
+**create test data**
+
+resources/scripts/sql/v2_proc_create_test_data.sql
+
+compile
+
+```sql
+source v2_proc_create_test_data.sql
+```
+
+This process takes about 90 - 120 minutes.
+
+```sql
+call proc_create_test_data();
+```
+
+results
+
+```text
+demo_user@localhost [demo_db] > select count(*) from customer;
++----------+
+| count(*) |
++----------+
+|   250000 |
++----------+
+1 row in set (0.13 sec)
+
+demo_user@localhost [demo_db] > select count(*) from customer_order;
++----------+
+| count(*) |
++----------+
+|  2805940 |
++----------+
+1 row in set (2.53 sec)
+
+demo_user@localhost [demo_db] > select count(*) from customer_review;
++----------+
+| count(*) |
++----------+
+|   131880 |
++----------+
+1 row in set (0.03 sec)
 ```

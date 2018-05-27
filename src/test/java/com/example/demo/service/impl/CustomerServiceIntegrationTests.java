@@ -1,8 +1,9 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.User;
-import com.example.demo.entity.UserOrder;
-import com.example.demo.service.UserService;
+import com.example.demo.entity.Customer;
+import com.example.demo.entity.CustomerOrder;
+import com.example.demo.entity.CustomerReview;
+import com.example.demo.service.CustomerService;
 import com.example.demo.type.Gender;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -22,25 +23,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceIntegrationTests {
+public class CustomerServiceIntegrationTests {
 
     @Autowired
-    private UserService sut;
+    private CustomerService sut;
 
     @Transactional(readOnly = true)
     @Test
     public void findById() {
-        User actual = sut.findById(1L).orElse(null);
+        Customer actual = sut.findById(1L).orElse(null);
 
         assertThat(actual).isNotNull();
         assertThat(actual.getId()).isEqualTo(1L);
-        assertThat(actual.getUserOrders()).hasSize(27);
+        assertThat(actual.getCustomerOrders()).hasSize(27);
     }
 
     @Transactional(readOnly = true)
     @Test
     public void findByIdNotExists() {
-        User actual = sut.findById(-1L).orElse(null);
+        Customer actual = sut.findById(-1L).orElse(null);
 
         assertThat(actual).isNull();
     }
@@ -48,17 +49,31 @@ public class UserServiceIntegrationTests {
     @Transactional(readOnly = true)
     @Test
     public void findByGender() {
-        List<User> actual = sut.findByGender(Gender.M);
+        List<Customer> actual = sut.findByGender(Gender.M);
 
         assertThat(actual).hasSize(100);
     }
 
     @Transactional(readOnly = true)
     @Test
-    public void findUserOrders() {
-        List<UserOrder> actual = sut.findUserOrders(1L);
+    public void findCustomerOrders() {
+        List<CustomerOrder> actual = sut.findCustomerOrders(1L);
 
         assertThat(actual).hasSize(27);
     }
 
+    @Transactional(readOnly = true)
+    @Test
+    public void findCustomerReviews() {
+        List<CustomerReview> actual = sut.findCustomerReviews(1L);
+
+        assertThat(actual).hasSize(27);
+    }
+
+    @Transactional
+    @Test
+    public void changeNickName() {
+        sut.changeNickName(1L, "test nick name");
+
+    }
 }

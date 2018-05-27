@@ -57,7 +57,7 @@ public class HelloControllerIntegrationTests {
     }
 
 /*
-    @SpringBootApplication(scanBasePackages = {"com.example.demomavenspring2"})
+    @SpringBootApplication(scanBasePackages = {"com.example.demo"})
     // don't work
     @EnableAutoConfiguration(
         exclude = {

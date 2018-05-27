@@ -9,7 +9,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.servlet.http.HttpServletRequest;
 
-@ControllerAdvice(basePackages = "com.example.demomavenspring2.controller")
+@ControllerAdvice(basePackages = "com.example.demo.controller")
 public class MyControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({Exception.class})

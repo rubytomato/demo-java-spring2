@@ -15,34 +15,34 @@ import java.util.Optional;
 @Slf4j
 public class MemoServiceImpl implements MemoService {
 
-    private final MemoRepository repository;
+    private final MemoRepository memoRepository;
 
     public MemoServiceImpl(MemoRepository repository) {
-        this.repository = repository;
+        this.memoRepository = repository;
     }
 
     @Transactional(readOnly = true)
     @Override
     public Optional<Memo> findById(Long id) {
-        return repository.findById(id);
+        return memoRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<Memo> findAll(Pageable page) {
-        return repository.findAll(page);
+        return memoRepository.findAll(page);
     }
 
     @Transactional(timeout = 10)
     @Override
     public void store(Memo memo) {
-        repository.save(memo);
+        memoRepository.save(memo);
     }
 
     @Transactional(timeout = 10)
     @Override
     public void removeById(Long id) {
-        repository.deleteById(id);
+        memoRepository.deleteById(id);
     }
 
 }

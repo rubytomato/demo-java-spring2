@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ItemServiceImpl implements ItemService {
 
-    private final ItemRepository repository;
+    private final ItemRepository itemRepository;
 
     public ItemServiceImpl(ItemRepository repository) {
-        this.repository = repository;
+        this.itemRepository = repository;
     }
 
 }

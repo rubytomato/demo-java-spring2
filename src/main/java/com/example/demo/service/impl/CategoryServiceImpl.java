@@ -15,28 +15,28 @@ import java.util.Optional;
 @Slf4j
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryRepository repository;
+    private final CategoryRepository categoryRepository;
 
     public CategoryServiceImpl(CategoryRepository repository) {
-        this.repository = repository;
+        this.categoryRepository = repository;
     }
 
     @Transactional(readOnly = true)
     @Override
     public Optional<Category> findById(Long id) {
-        return repository.findById(id);
+        return categoryRepository.findById(id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<Category> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+        return categoryRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<Category> findLikeName(String name, Pageable pageable) {
-        return repository.findByNameLike(name, pageable);
+        return categoryRepository.findByNameLike(name, pageable);
     }
 
 }

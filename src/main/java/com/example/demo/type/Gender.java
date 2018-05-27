@@ -2,11 +2,11 @@ package com.example.demo.type;
 
 public enum Gender {
     /**
-     * 男性
+     * male
      */
     M,
     /**
-     * 女性
+     * female
      */
     F
 }

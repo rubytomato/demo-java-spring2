@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * this code is investigation.
  */
 @RestController
-@RequestMapping(path="hello")
+@RequestMapping(path = "hello")
 public class HelloController {
 
     public HelloController(FooProperties foo, Environment env, BuildProperties prop) {
@@ -24,7 +24,7 @@ public class HelloController {
     private final Environment env;
     private final BuildProperties prop;
 
-    @GetMapping(path="world")
+    @GetMapping(path = "world")
     public String greeting() {
         System.out.println(prop.getGroup() + " " + prop.getName() + " " + prop.getVersion());
         System.out.println(foo);
