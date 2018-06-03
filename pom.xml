@@ -91,7 +91,6 @@
                         <configuration>
                             <outputFile>dependency.txt</outputFile>
                             <outputType>text</outputType>
-                            <verbose>true</verbose>
                         </configuration>
                     </execution>
                 </executions>

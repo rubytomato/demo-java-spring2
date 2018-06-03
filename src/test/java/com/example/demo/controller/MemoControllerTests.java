@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,10 +42,10 @@ public class MemoControllerTests {
     private MemoService memoService;
 
     private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-            MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+            MediaType.APPLICATION_JSON.getSubtype(), StandardCharsets.UTF_8);
 
     @Test
-    public void getOne() throws Exception {
+    public void getMemo() throws Exception {
         Memo expected = Memo.of(1L, "test title", "test description");
         String expectedJson = objectMapper.writeValueAsString(expected);
         Mockito.when(memoService.findById(anyLong())).thenReturn(Optional.ofNullable(expected));

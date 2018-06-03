@@ -17,7 +17,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,7 +34,7 @@ public class HelloControllerIntegrationTests {
     private TestRestTemplate testRestTemplate;
 
     private MediaType contentType = new MediaType(MediaType.TEXT_PLAIN.getType(),
-            MediaType.TEXT_PLAIN.getSubtype(), Charset.forName("utf8"));
+            MediaType.TEXT_PLAIN.getSubtype(), StandardCharsets.UTF_8);
 
     @Test
     public void greeting() {
