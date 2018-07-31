@@ -28,13 +28,13 @@
         {
           "name": "handle-as",
           "parameters": {
-            "target": "com.example.demomavenspring2.type.Color"
+            "target": "com.example.demo.type.Color"
           }
         }
       ]
     },
     {
-      "name": "my-app.my-module.foo.parts.values",
+      "name": "my-app.my-module.foo.parts.upper.values",
       "values": [
         {
           "value": "TRUE",
