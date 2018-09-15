@@ -15,34 +15,41 @@ import java.util.Optional;
 @Slf4j
 public class MemoServiceImpl implements MemoService {
 
-    private final MemoRepository memoRepository;
+  private final MemoRepository memoRepository;
 
-    public MemoServiceImpl(MemoRepository repository) {
-        this.memoRepository = repository;
-    }
+  public MemoServiceImpl(MemoRepository repository) {
+    this.memoRepository = repository;
+  }
 
-    @Transactional(readOnly = true)
-    @Override
-    public Optional<Memo> findById(Long id) {
-        return memoRepository.findById(id);
-    }
+  @Transactional(readOnly = true)
+  @Override
+  public Optional<Memo> findById(Long id) {
+    return memoRepository.findById(id);
+  }
 
-    @Transactional(readOnly = true)
-    @Override
-    public Page<Memo> findAll(Pageable page) {
-        return memoRepository.findAll(page);
-    }
+  @Transactional(readOnly = true)
+  @Override
+  public Page<Memo> findAll(Pageable page) {
+    return memoRepository.findAll(page);
+  }
 
-    @Transactional(timeout = 10)
-    @Override
-    public void store(Memo memo) {
-        memoRepository.save(memo);
-    }
+  @Transactional(timeout = 10)
+  @Override
+  public void store(Memo memo) {
+    memoRepository.save(memo);
+  }
 
-    @Transactional(timeout = 10)
-    @Override
-    public void removeById(Long id) {
-        memoRepository.deleteById(id);
-    }
+  @Transactional(timeout = 10)
+  @Override
+  public void updateById(Long id, Memo modifiedMemo) {
+    memoRepository.findById(id)
+        .ifPresentOrElse(memo -> memo.merge(modifiedMemo), () -> log.info("memo id:{} nof found.", id));
+  }
+
+  @Transactional(timeout = 10)
+  @Override
+  public void removeById(Long id) {
+    memoRepository.deleteById(id);
+  }
 
 }
