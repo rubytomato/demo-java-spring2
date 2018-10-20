@@ -3,7 +3,7 @@
 Development environment
 
 * OpenJDK 10.0.2
-* Spring Boot 2.0.5
+* Spring Boot 2.0.6
 * MySQL CE 5.7.19
 * Maven 3.5.4
 
